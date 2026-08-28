@@ -1,0 +1,52 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Visual Studio Code related
+.vscode/
+
+# Flutter/Dart related
+**/doc/api/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+build/
+flutter_*.png
+
+# Android related
+**/android/app/debug
+**/android/app/profile
+**/android/app/release
+**/android/key.jks
+**/android/app/key.jks
+**/android/app/local.properties
+**/android/app/aar/
+**/android/app/bundle/
+**/android/app/capture/
+**/android/app/flutter_build_mimes/
+**/android/app/intermediates/
+**/android/app/outputs/
+**/android/app/tmp/
+**/android/.gradle
+**/android/captures/
+**/android/gradlew
+**/android/gradlew.bat
+**/android/local.properties
+**/GeneratedPluginRegistrant.java
