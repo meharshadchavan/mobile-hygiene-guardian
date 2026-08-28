@@ -78,5 +78,40 @@ void main() {
         expect(r.finalScore, equals(85));
       }
     });
+
+    test('Stress Test: 50,000 Mixed Apps with Permutations', () {
+      final List<Map<String, dynamic>> massiveAppList = List.generate(50000, (i) {
+        return {
+          'appName': 'App_$i',
+          'packageName': 'com.test.app_$i',
+          'isSideloaded': i % 2 == 0,
+          'hasAccessibility': i % 3 == 0,
+          'hasSms': i % 4 == 0,
+          'hasOverlay': i % 5 == 0,
+        };
+      });
+
+      final rawData = {'apps': massiveAppList};
+      final stopwatch = Stopwatch()..start();
+      final report = engine.calculateReport(rawData);
+      stopwatch.stop();
+
+      expect(report.finalScore, equals(0)); // Rapid score degradation to 0
+      expect(report.riskCategory, equals('RED'));
+      expect(stopwatch.elapsedMilliseconds, lessThan(2000));
+    });
+
+    test('Stress Test: Deeply nested, corrupt & non-primitive payload types', () {
+      final corruptData = {
+        'osSecurity': 'NOT_A_MAP',
+        'network': 99999,
+        'apps': 'NOT_A_LIST',
+      };
+
+      expect(() => engine.calculateReport(corruptData), returnsNormally);
+      final report = engine.calculateReport(corruptData);
+      expect(report.finalScore, equals(100));
+      expect(report.threats, isEmpty);
+    });
   });
 }
