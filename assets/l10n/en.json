@@ -1,0 +1,13 @@
+{
+  "app_title": "Mobile Hygiene Guardian",
+  "hygiene_score": "Hygiene Score",
+  "re_scan": "Re-Scan",
+  "jarvis_report": "Jarvis Report",
+  "detected_risks": "Detected Security Risks",
+  "no_threats": "No Threats Detected",
+  "no_threats_desc": "Your device hygiene posture is optimal.",
+  "fix_now": "Fix Now",
+  "police_helpline_title": "Gujarat Police Cyber Crime Helpline",
+  "police_helpline_desc": "If you are a victim of financial fraud, call 1930 immediately to freeze transactions.",
+  "call_1930": "Call Helpline 1930"
+}
