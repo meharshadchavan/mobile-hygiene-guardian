@@ -133,6 +133,65 @@ void main() {
       expect(report.threats.first.title, equals('Active Proxy Interceptor'));
     });
 
+    test('Open Wi-Fi applies 15 point deduction', () {
+      final rawData = {
+        'osSecurity': {'isDeviceSecure': true},
+        'network': {'isOpenWifi': true},
+        'apps': []
+      };
+
+      final report = engine.calculateReport(rawData);
+      expect(report.finalScore, equals(85));
+      expect(report.threats.first.title, contains('Open / Unencrypted Wi-Fi Risk'));
+    });
+
+    test('Outdated OS Security Patch applies 10 point deduction', () {
+      final rawData = {
+        'osSecurity': {'isDeviceSecure': true, 'isPatchOutdated': true},
+        'apps': []
+      };
+
+      final report = engine.calculateReport(rawData);
+      expect(report.finalScore, equals(90));
+      expect(report.threats.first.title, contains('Outdated System Security Patch'));
+    });
+
+    test('Known Community Malware Signature applies 30 point deduction and CRITICAL severity', () {
+      final rawData = {
+        'osSecurity': {'isDeviceSecure': true},
+        'apps': [
+          {
+            'appName': 'Electricity Bill Update',
+            'packageName': 'com.electricity.bill.pay',
+            'isSideloaded': true,
+          }
+        ]
+      };
+
+      final report = engine.calculateReport(rawData);
+      expect(report.finalScore, equals(70));
+      expect(report.threats.first.severity, equals(RiskSeverity.critical));
+      expect(report.threats.first.title, contains('Known Malware / Phishing Match'));
+    });
+
+    test('Sideloaded Background Service applies 15 point deduction', () {
+      final rawData = {
+        'osSecurity': {'isDeviceSecure': true},
+        'apps': [
+          {
+            'appName': 'BackgroundTracker',
+            'packageName': 'com.track.app',
+            'isSideloaded': true,
+            'hasBackgroundService': true,
+          }
+        ]
+      };
+
+      final report = engine.calculateReport(rawData);
+      expect(report.finalScore, equals(85));
+      expect(report.threats.first.title, contains('Background Drain & Battery Risk'));
+    });
+
     test('Cumulative score deductions clamp at 0 minimum and RED category', () {
       final rawData = {
         'osSecurity': {
@@ -166,6 +225,22 @@ void main() {
       expect(report.finalScore, equals(0));
       expect(report.riskCategory, equals('RED'));
       expect(report.threats.length, equals(7));
+    });
+
+    test('HygieneReport.platformUnsupported constructs correct unsupported state', () {
+      final report = HygieneReport.platformUnsupported();
+      expect(report.finalScore, equals(-1));
+      expect(report.riskCategory, equals('UNSUPPORTED'));
+      expect(report.isError, isTrue);
+      expect(report.errorMessage, contains('Android devices'));
+    });
+
+    test('HygieneReport.scanError constructs correct error state', () {
+      final report = HygieneReport.scanError('Test error message');
+      expect(report.finalScore, equals(-1));
+      expect(report.riskCategory, equals('ERROR'));
+      expect(report.isError, isTrue);
+      expect(report.errorMessage, equals('Test error message'));
     });
   });
 }
