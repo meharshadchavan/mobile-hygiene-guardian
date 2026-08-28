@@ -46,4 +46,13 @@ class AppTranslations {
       return speech;
     }
   }
+
+  static List<String> getCyberTips(String languageCode) {
+    return [
+      get('tip_1', languageCode, defaultValue: 'Never install APK files sent via WhatsApp, SMS, or Telegram links.'),
+      get('tip_2', languageCode, defaultValue: 'Never grant Accessibility permission or share OTPs with unverified apps.'),
+      get('tip_3', languageCode, defaultValue: 'Avoid using open public Wi-Fi networks for banking transactions.'),
+      get('tip_4', languageCode, defaultValue: 'Report financial fraud immediately by calling 1930 within the golden hour.'),
+    ];
+  }
 }
