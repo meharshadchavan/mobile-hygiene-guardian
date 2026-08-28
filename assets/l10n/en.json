@@ -9,5 +9,18 @@
   "fix_now": "Fix Now",
   "police_helpline_title": "Gujarat Police Cyber Crime Helpline",
   "police_helpline_desc": "If you are a victim of financial fraud, call 1930 immediately to freeze transactions.",
-  "call_1930": "Call Helpline 1930"
+  "call_1930": "Call Helpline 1930",
+  "cyber_tips_title": "Cyber Hygiene & Safety Tips",
+  "share_report": "Share Health Report",
+  "tip_1": "Never install APK files sent via WhatsApp, SMS, or Telegram links.",
+  "tip_2": "Never grant Accessibility permission or share OTPs with unverified apps.",
+  "tip_3": "Avoid using open public Wi-Fi networks for banking transactions.",
+  "tip_4": "Report financial fraud immediately by calling 1930 within the golden hour.",
+  "tab_audit": "Device Audit",
+  "tab_scam_scanner": "Scam Scanner",
+  "tab_report": "Forensic Report",
+  "export_pdf": "Export Police Advisory PDF",
+  "scan_message_hint": "Paste suspicious SMS or WhatsApp message here...",
+  "analyze_message": "Analyze Phishing Risk",
+  "scam_probability": "Scam Likelihood"
 }
